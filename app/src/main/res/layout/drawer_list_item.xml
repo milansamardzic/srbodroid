@@ -1,0 +1,13 @@
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@android:id/text1"
+    android:layout_width="match_parent"
+    android:layout_height="55dp"
+    android:gravity="center_vertical"
+    app:theme="@style/Theme.AppCompat.Light"
+    android:background="@drawable/default_item_click_selector"
+    android:drawablePadding="20dp"
+    android:textSize="18sp"
+    android:textColor="@color/text_color_grey"
+    android:paddingLeft="20dp"/>

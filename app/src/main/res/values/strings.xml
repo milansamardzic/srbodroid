@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="app_name">SrboDroid</string>
+    <string name="network_error">Greška u komunikaciji sa serverom.</string>
+    <string name="please_wait">Molimo Sačekajte...</string>
+    <string name="unknown_error">Došlo je do greške, pokušajte ponovo.</string>
+    <string name="news">Vesti</string>
+
+    <string name="no_news">Nema Vesti</string>
+    <string name="new_news_notification_text" formatted="false">%s %s %s news.</string>
+    <string name="about">O nama</string>
+    <string name="cooperation">Saradnja</string>
+    <string name="contact">Kontakt</string>
+    <string name="what_is_android">Šta je Android?</string>
+    <string name="author" formatted="false"><![CDATA[Objavio <font color=\'#00aeec\'>%s</font> u <font color=\'#00aeec\'>%s</font>]]></string>
+
+</resources>

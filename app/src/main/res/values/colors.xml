@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#282828</color>
+    <color name="primaryDark">#222222</color>
+    <color name="accent">#00aeec</color>
+
+    <color name="comment_background_color">#007099</color>
+    <color name="time_background_color">#0096cc</color>
+
+    <color name="grey_bg">#d1d1d1</color>
+    <color name="text_color_grey">#4a4a4a</color>
+    <color name="text_color_grey_light">#777777</color>
+    <color name="def_touch_feedback">#80cdcdcd</color>
+    <color name="divider">#b8b7b7</color>
+    <color name="overlay">#7F172933</color>
+    <color name="text_color_gold">#ada771</color>
+</resources>

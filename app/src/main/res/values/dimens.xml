@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="dp90">90dp</dimen>
+    <dimen name="card_view_padding">-2dp</dimen>
+    <dimen name="navigation_drawer_width">304dp</dimen>
+    <dimen name="header_height">66dp</dimen>
+    <dimen name="news_details_default_image_height">200dp</dimen>
+</resources>
