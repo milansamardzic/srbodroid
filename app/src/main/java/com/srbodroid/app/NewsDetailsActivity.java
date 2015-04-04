@@ -26,8 +26,6 @@ import com.srbodroid.app.utility.DisplayManager;
 import com.srbodroid.app.utility.Utility;
 import com.srbodroid.app.view.NotifyingScrollView;
 
-import java.text.ParseException;
-
 /**
  * Created by pedja on 12.12.14. 09.22.
  * This class is part of the Srbodroid
@@ -65,7 +63,7 @@ public class NewsDetailsActivity extends ActionBarActivity implements Drawable.C
         TextView tvTime = (TextView)findViewById(R.id.tvTime);
 
         ivImage.setDefaultImageResId(R.drawable.no_image);
-        ivImage.setImageUrl(ni.getMainImage().getUrl(), mLoader);
+        ivImage.setImageUrl(ni.getMainImageUrl(), mLoader);
         ivImage.setImageListener(new Response.Listener<BitmapDrawable>()
         {
             @Override

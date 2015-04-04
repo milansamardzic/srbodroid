@@ -221,11 +221,11 @@ public class News {
     }
 
     // KEEP METHODS - put your custom methods here
-    public Image getMainImage()
+    public String getMainImageUrl()
     {
         if(getImages() != null && !getImages().isEmpty())
         {
-            return getImages().get(0);
+            return getImages().get(0).getUrl();
         }
         return null;
     }

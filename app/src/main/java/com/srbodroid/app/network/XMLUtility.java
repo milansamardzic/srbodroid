@@ -4,6 +4,7 @@ import com.crashlytics.android.Crashlytics;
 import com.srbodroid.app.BuildConfig;
 import com.srbodroid.app.MainApp;
 import com.srbodroid.app.model.Image;
+import com.srbodroid.app.model.ImageDao;
 import com.srbodroid.app.model.News;
 import com.srbodroid.app.model.NewsDao;
 import com.srbodroid.app.utility.Constants;
@@ -22,6 +23,7 @@ import java.util.regex.Pattern;
 
 import javax.xml.parsers.SAXParserFactory;
 
+import de.greenrobot.dao.query.DeleteQuery;
 import de.greenrobot.dao.query.QueryBuilder;
 
 /**
@@ -33,6 +35,7 @@ import de.greenrobot.dao.query.QueryBuilder;
 public class XMLUtility
 {
     private static final Pattern imgPattern = Pattern.compile("<img.+?src=\"(.+?)\".*?(/>|</.*img>)", Pattern.DOTALL);
+    private static final Pattern largeImagePattern = Pattern.compile("data-large-file=\"(.+)\"", Pattern.DOTALL);
     private static final Pattern iFrameTagPattern = Pattern.compile("<iframe src=\"(.+?)\".+?/(iframe)*>");
     private static final Pattern idPattern = Pattern.compile(".+\\?p=(\\d+)");
     private final Internet.Response serverResponse;
@@ -126,6 +129,7 @@ public class XMLUtility
 
         public NewsRssHandler()
         {
+            MainApp.getInstance().getDaoSession().clear();
             newsItems = new ArrayList<>();
         }
 
@@ -180,12 +184,28 @@ public class XMLUtility
                 Matcher matcher = imgPattern.matcher(tempItem.getContent());
                 while (matcher.find())
                 {
+                    if(!matcher.group(1).startsWith("http") && !matcher.group(1).startsWith("https") && !matcher.group(1).startsWith("ftp"))
+                        continue;
                     Image image = new Image();
                     image.setNews_id(tempItem.getId());
-                    image.setUrl(matcher.group(1));
+                    Matcher largeImageMatcher = largeImagePattern.matcher(matcher.group());
+                    if(largeImageMatcher.find())
+                    {
+                        image.setUrl(largeImageMatcher.group(1));
+                    }
+                    else
+                    {
+                        image.setUrl(matcher.group(1));
+                    }
                     images.add(image);
                 }
-                MainApp.getInstance().getDaoSession().getImageDao().insertOrReplaceInTx(images);
+                //delete all images for this news
+                ImageDao imageDao = MainApp.getInstance().getDaoSession().getImageDao();
+                QueryBuilder<Image> deleteBuilder = imageDao.queryBuilder();
+                deleteBuilder.where(ImageDao.Properties.News_id.eq(tempItem.getId()));
+                DeleteQuery<Image> deleteQuery = deleteBuilder.buildDelete();
+                deleteQuery.executeDeleteWithoutDetachingEntities();
+                imageDao.insertOrReplaceInTx(images);
                 tempItem.setContent(matcher.replaceAll(""));//remove all images
                 Matcher iFrameMatcher = iFrameTagPattern.matcher(tempItem.getContent());
                 //replace all iframes with links, since tv doesn't support iframes

@@ -73,7 +73,7 @@ public class NewsAdapter extends ArrayAdapter<News>
         holder.tvDate2.setText(Utility.formatDateString(formatYear, ni.getPubDate()));
         holder.tvCommentCount.setText(ni.getComment_count() + "");
         holder.tvAuthor.setText(Html.fromHtml(getContext().getResources().getString(R.string.author, ni.getAuthor(), ni.getCategory())));
-        mLoader.get(ni.getMainImage().getUrl(), holder.ivImage);
+        mLoader.get(ni.getMainImageUrl(), holder.ivImage);
 
         return convertView;
     }
